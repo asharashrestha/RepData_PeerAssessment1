@@ -1,8 +1,8 @@
 ---
 title: "Reproducible Assignment 1"
 author: "Aashara Shrestha"
+date: "February 6, 2016"
 output: html_document
-md: TRUE
 ---
 
 
