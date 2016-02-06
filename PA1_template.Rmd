@@ -22,6 +22,7 @@ stepshist<-ggplot(stepsperday,aes(x=totalsteps))+geom_histogram()+
   theme_bw()
 print(stepshist)
 
+```
 #3. Mean and median number of steps taken each day 
 ```{r,echo=TRUE}           
 activity_mean<- mean(stepsperday$totalsteps, na.rm=TRUE)
@@ -29,7 +30,7 @@ activity_median <- median(stepsperday$totalsteps)
 
 #calculating steps per 5 minute
 stepsper5min<-ddply(activity, c("interval"),summarise,meansteps =mean(steps,na.rm=TRUE))
-
+```
 #4. Time series plot of the average number of steps taken 
 ```{r,echo=TRUE}               
 activity_5min<-ggplot(stepsper5min,aes(x=interval,y=meansteps))+geom_line()+
@@ -39,7 +40,7 @@ activity_5min<-ggplot(stepsper5min,aes(x=interval,y=meansteps))+geom_line()+
 print(activity_5min)
 
 
-
+```
 ## What is the average daily activity pattern?
 
 #5. The 5-minute interval that, on average, contains the maximum number of steps
@@ -47,13 +48,13 @@ print(activity_5min)
 max_interval<- stepsper5min[which(stepsper5min$meansteps==max(stepsper5min$meansteps)), "interval"]
 
 
-
+```
 ## Imputing missing values
 
 #6. Code to describe and show a strategy for imputing missing data
 ```{r,echo=TRUE}
 total_rows_with_NA<- nrow(activity)-sum(complete.cases(activity))
-
+```
 #Strategy for filling in all missing values
 #Interpolation is done by using the average of the previous valid observation and the next valid observation, or the average for the relevant 5-min #interval if there is no valid #previous/next observation. 
 #This produces smooth activity-over-the-day lines for each 
@@ -80,7 +81,7 @@ for(n in 1:nrow(activity)){
     activity_guessNA$steps[n]=step_interpolation(n);
   }
 }
-
+```
 #7. Histogram of the total number of steps taken each day after missing values are imputed
 ```{r,echo=TRUE}
 new_stepsperday<-merge(
@@ -95,7 +96,7 @@ hist_perday<-ggplot(new_stepsperday,aes(x=guesstotalsteps))+
   ggtitle("Histogram of total number of steps per day after missing values imputed")+
   theme_bw()
 print(hist_perday)
-
+```
 ##New mean and median
 
 #for the NA-imputed data the mean is 
