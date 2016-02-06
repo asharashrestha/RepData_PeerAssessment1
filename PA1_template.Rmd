@@ -116,10 +116,11 @@ stepsperinterval.weekdaysplit<-ddply(activity_guessNA, c("interval","weekday"),s
                                      meansteps = mean(steps,na.rm=TRUE)
 )
 
-#Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute #interval (x-axis) and the average number of steps taken, averaged #across all weekday days #or weekend days (y-axis).
 ```
 # 8. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
 ```{r,echo=TRUE}
+#Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute #interval (x-axis) and the average number of steps taken, averaged #across all weekday days #or weekend days (y-axis).
+
 weekdayplot<-ggplot(stepsperinterval.weekdaysplit,aes(x=interval,y=meansteps))+
   facet_wrap(~weekday,nrow=2,ncol=1)+
   geom_line()+
