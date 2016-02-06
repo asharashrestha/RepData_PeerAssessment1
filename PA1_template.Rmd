@@ -12,10 +12,10 @@ output:
 activity<-read.csv("activity.csv",colClasses=c("integer","Date","integer"))
 ```
 
-
-## What is mean total number of steps taken per day?
 #2. Histogram of the total number of steps taken each day
 ```{r,echo=TRUE}
+## What is mean total number of steps taken per day?
+
 stepshist<-ggplot(stepsperday,aes(x=totalsteps))+geom_histogram()+
   xlab("Total Number Of Steps")+
   ggtitle("Histogram Of Total Steps Taken Each Day")+
@@ -41,20 +41,19 @@ print(activity_5min)
 
 
 ```
-## What is the average daily activity pattern?
-
 #5. The 5-minute interval that, on average, contains the maximum number of steps
 ```{r,echo=TRUE}
+## What is the average daily activity pattern?
 max_interval<- stepsper5min[which(stepsper5min$meansteps==max(stepsper5min$meansteps)), "interval"]
 
 
 ```
-## Imputing missing values
-
 #6. Code to describe and show a strategy for imputing missing data
 ```{r,echo=TRUE}
+
+## Imputing missing values
 total_rows_with_NA<- nrow(activity)-sum(complete.cases(activity))
-```
+
 #Strategy for filling in all missing values
 #Interpolation is done by using the average of the previous valid observation and the next valid observation, or the average for the relevant 5-min #interval if there is no valid #previous/next observation. 
 #This produces smooth activity-over-the-day lines for each 
@@ -81,6 +80,7 @@ for(n in 1:nrow(activity)){
     activity_guessNA$steps[n]=step_interpolation(n);
   }
 }
+
 ```
 #7. Histogram of the total number of steps taken each day after missing values are imputed
 ```{r,echo=TRUE}
@@ -96,7 +96,7 @@ hist_perday<-ggplot(new_stepsperday,aes(x=guesstotalsteps))+
   ggtitle("Histogram of total number of steps per day after missing values imputed")+
   theme_bw()
 print(hist_perday)
-```
+
 ##New mean and median
 
 #for the NA-imputed data the mean is 
@@ -117,7 +117,7 @@ stepsperinterval.weekdaysplit<-ddply(activity_guessNA, c("interval","weekday"),s
 )
 
 #Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute #interval (x-axis) and the average number of steps taken, averaged #across all weekday days #or weekend days (y-axis).
-
+```
 # 8. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
 ```{r,echo=TRUE}
 weekdayplot<-ggplot(stepsperinterval.weekdaysplit,aes(x=interval,y=meansteps))+
