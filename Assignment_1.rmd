@@ -1,19 +1,15 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+#loading package
+library(ggplot2)
+library(plyr)
 
-
-## Loading and preprocessing the data
 #1. Code for reading in the dataset and/or processing the data
 ```{r,echo=TRUE}
 activity<-read.csv("activity.csv",colClasses=c("integer","Date","integer"))
 
+#Steps taken per day
+stepsperday<-ddply(activity, c("date"),summarise,totalsteps=sum(steps,na.rm=TRUE))
 
 
-## What is mean total number of steps taken per day?
 #2. Histogram of the total number of steps taken each day
 ```{r,echo=TRUE}
 stepshist<-ggplot(stepsperday,aes(x=totalsteps))+geom_histogram()+
@@ -30,6 +26,7 @@ activity_median <- median(stepsperday$totalsteps)
 #calculating steps per 5 minute
 stepsper5min<-ddply(activity, c("interval"),summarise,meansteps =mean(steps,na.rm=TRUE))
 
+
 #4. Time series plot of the average number of steps taken 
 ```{r,echo=TRUE}               
 activity_5min<-ggplot(stepsper5min,aes(x=interval,y=meansteps))+geom_line()+
@@ -38,17 +35,9 @@ activity_5min<-ggplot(stepsper5min,aes(x=interval,y=meansteps))+geom_line()+
   theme_bw()
 print(activity_5min)
 
-
-
-## What is the average daily activity pattern?
-
 #5. The 5-minute interval that, on average, contains the maximum number of steps
 ```{r,echo=TRUE}
 max_interval<- stepsper5min[which(stepsper5min$meansteps==max(stepsper5min$meansteps)), "interval"]
-
-
-
-## Imputing missing values
 
 #6. Code to describe and show a strategy for imputing missing data
 ```{r,echo=TRUE}
@@ -103,9 +92,6 @@ mean(new_stepsperday$guesstotalsteps,na.rm=TRUE)
 #for the NA-imputed data the median is
 median(new_stepsperday$guesstotalsteps,na.rm=TRUE)
 
-
-## Are there differences in activity patterns between weekdays and weekends?
-
 #Create a new factor variable in the dataset with two levels - "weekday" and "weekend" #indicating whether a given date is a weekday or weekend day.
 
 paindays= c("Monday","Tuesday","Wednesday","Thursday","Friday")
@@ -127,3 +113,4 @@ weekdayplot<-ggplot(stepsperinterval.weekdaysplit,aes(x=interval,y=meansteps))+
   ylab("Mean steps")+
   xlab("Interval number")
 print(weekdayplot)
+ 
