@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Reproducible Assignment Week1"
 author: "Aashara Shrestha"
 date: "February 6, 2016"
 output: html_document
@@ -27,6 +27,7 @@ stepshist<-ggplot(stepsperday,aes(x=totalsteps))+geom_histogram()+
   ggtitle("Histogram Of Total Steps Taken Each Day")+
   theme_bw()
 print(stepshist)
+```
 
 #3. Mean and median number of steps taken each day 
 ```{r,echo=TRUE}           
@@ -35,7 +36,7 @@ activity_median <- median(stepsperday$totalsteps)
 
 #calculating steps per 5 minute
 stepsper5min<-ddply(activity, c("interval"),summarise,meansteps =mean(steps,na.rm=TRUE))
-
+```
 
 #4. Time series plot of the average number of steps taken 
 ```{r,echo=TRUE}               
@@ -44,11 +45,11 @@ activity_5min<-ggplot(stepsper5min,aes(x=interval,y=meansteps))+geom_line()+
   ylab("Mean Steps")+
   theme_bw()
 print(activity_5min)
-
+```
 #5. The 5-minute interval that, on average, contains the maximum number of steps
 ```{r,echo=TRUE}
 max_interval<- stepsper5min[which(stepsper5min$meansteps==max(stepsper5min$meansteps)), "interval"]
-
+```
 #6. Code to describe and show a strategy for imputing missing data
 ```{r,echo=TRUE}
 total_rows_with_NA<- nrow(activity)-sum(complete.cases(activity))
@@ -79,6 +80,8 @@ for(n in 1:nrow(activity)){
     activity_guessNA$steps[n]=step_interpolation(n);
   }
 }
+```
+
 
 #7. Histogram of the total number of steps taken each day after missing values are imputed
 ```{r,echo=TRUE}
@@ -112,9 +115,10 @@ stepsperinterval.weekdaysplit<-ddply(activity_guessNA, c("interval","weekday"),s
 )
 
 #Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute #interval (x-axis) and the average number of steps taken, averaged #across all weekday days #or weekend days (y-axis).
-
-# 8. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
+```
 ```{r,echo=TRUE}
+# 8. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
+
 weekdayplot<-ggplot(stepsperinterval.weekdaysplit,aes(x=interval,y=meansteps))+
   facet_wrap(~weekday,nrow=2,ncol=1)+
   geom_line()+
@@ -123,4 +127,4 @@ weekdayplot<-ggplot(stepsperinterval.weekdaysplit,aes(x=interval,y=meansteps))+
   ylab("Mean steps")+
   xlab("Interval number")
 print(weekdayplot)
- 
+ ```
