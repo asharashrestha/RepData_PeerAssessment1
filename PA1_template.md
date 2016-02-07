@@ -29,7 +29,7 @@ names(total_steps) <- c("date", "total_steps")
 hist(total_steps$total_steps, main = "Total number of steps taken per day", xlab = "Day", ylab = "Total number of steps", col = "blue")
 ```
 
-![plot of chunk unnamed-chunk-2](figure/rplot-1.png)
+![plot of chunk unnamed-chunk-2](instructions_fig/rplot-1.png)
 
 ```r
 mean(total_steps$total_steps)
@@ -59,7 +59,7 @@ plot(average_data$interval, average_data$average, type="l", col="red", lwd=2,
      main="Time-series plot of the average number of steps per 5 minute intervals")
 ```
 
-![plot of chunk unnamed-chunk-3](figure/rplot-2.png)
+![plot of chunk unnamed-chunk-3](instructions_fig/rplot-2.png)
 
 ```r
 average_data[average_data$average == max(average_data$average),]
@@ -87,7 +87,7 @@ names(sum_steps) <- c("date", "total")
 hist(sum_steps$total, main = "Total number of steps taken per day (NA replaced by mean value of steps", xlab = "Day", ylab = "Total number of steps", col = "green")
 ```
 
-![plot of chunk unnamed-chunk-4](figurerplot-3.png)
+![plot of chunk unnamed-chunk-4](instructions_fig/rplot-3.png)
 
 ```r
 mean(sum_steps$total)
