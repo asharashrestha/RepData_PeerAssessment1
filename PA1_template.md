@@ -29,7 +29,7 @@ names(total_steps) <- c("date", "total_steps")
 hist(total_steps$total_steps, main = "Total number of steps taken per day", xlab = "Day", ylab = "Total number of steps", col = "blue")
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-2](figure/rplot-1.png)
 
 ```r
 mean(total_steps$total_steps)
@@ -59,7 +59,7 @@ plot(average_data$interval, average_data$average, type="l", col="red", lwd=2,
      main="Time-series plot of the average number of steps per 5 minute intervals")
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-3](figure/rplot-2.png)
 
 ```r
 average_data[average_data$average == max(average_data$average),]
@@ -87,7 +87,7 @@ names(sum_steps) <- c("date", "total")
 hist(sum_steps$total, main = "Total number of steps taken per day (NA replaced by mean value of steps", xlab = "Day", ylab = "Total number of steps", col = "green")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](figurerplot-3.png)
 
 ```r
 mean(sum_steps$total)
@@ -120,5 +120,5 @@ names(avg_steps) <- c("daytype", "day_of_the_week", "interval", "mean")
 xyplot(avg_steps$mean ~ avg_steps$interval | avg_steps$daytype, layout = c(1, 2), type = "l", xlab = "Interval", ylab = "Number of steps")
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](rplot-4.png)
 
