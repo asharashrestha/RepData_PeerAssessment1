@@ -120,5 +120,5 @@ names(avg_steps) <- c("daytype", "day_of_the_week", "interval", "mean")
 xyplot(avg_steps$mean ~ avg_steps$interval | avg_steps$daytype, layout = c(1, 2), type = "l", xlab = "Interval", ylab = "Number of steps")
 ```
 
-![plot of chunk unnamed-chunk-5](instructions-fig/rplot-4.png)
+![plot of chunkrplot-4](instructions-fig/rplot-4.png)
 
