@@ -7,6 +7,8 @@ md: TRUE
 
 
 ## Loading and preprocessing the data
+library(ggplot2)
+library(plyr)
 #1. Code for reading in the dataset and/or processing the data
 ```{r,echo=TRUE}
 activity<-read.csv("activity.csv",colClasses=c("integer","Date","integer"))
